@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="SignalMessenger.Views.HeaderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"  
+             xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <UserControl.Resources>
+        <Style TargetType="Border" x:Key="Icon">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="CornerRadius" Value="4"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="CornerRadius" Value="1"/>
+                    <Setter Property="Background" Value="#ccc0d3"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="#e6d7ee">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="110"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" Style="{DynamicResource Icon}" MouseLeftButtonDown="MinimizedClick">
+                <svgc:SvgViewbox Source="/Images/minimized.svg"/>
+            </Border>
+            <Border x:Name="MaxBorder" Grid.Column="1" Style="{DynamicResource Icon}" MouseLeftButtonDown="MaximizedClick">
+                <svgc:SvgViewbox Source="/Images/maximizied.svg"/>
+            </Border>
+            <Border x:Name="NormBorder" Visibility="Collapsed" Grid.Column="1" Style="{DynamicResource Icon}" MouseLeftButtonDown="MaximizedClick">
+                <svgc:SvgViewbox Source="/Images/normal.svg"/>
+            </Border>
+            <Border Grid.Column="2" Style="{DynamicResource Icon}" MouseLeftButtonDown="CloseClick">
+                <svgc:SvgViewbox Source="/Images/close.svg"/>
+            </Border>
+        </Grid>
+
+    </Grid>
+</UserControl>

@@ -4,12 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:prism="http://prismlibrary.com/"        
-        
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Grid Background="#e9e7e7">
 
-        <ContentControl prism:RegionManager.RegionName="MainRegion"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <ContentControl MouseLeftButtonDown="Header_MouseLeftButtonDown" HorizontalAlignment="Stretch" Grid.Row="0" prism:RegionManager.RegionName="HeaderRegion"/>
+        <ContentControl Grid.Row="1" prism:RegionManager.RegionName="MainRegion"/>
 
     </Grid>
 </Window>

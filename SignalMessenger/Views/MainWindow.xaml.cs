@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using SignalMessenger.Services;
+using System.Windows;
 
 namespace SignalMessenger.Views
 {
@@ -10,6 +11,13 @@ namespace SignalMessenger.Views
         public MainWindow()
         {
             InitializeComponent();
+
+            HeaderToolService.Instance.OnMinimized += () => this.WindowState = WindowState.Minimized;
+            HeaderToolService.Instance.OnMaximized += () => this.WindowState = WindowState.Maximized;
+            HeaderToolService.Instance.OnNormal += () => this.WindowState = WindowState.Normal;
+            HeaderToolService.Instance.OnClosed += () => Application.Current.Shutdown();
         }
+
+        private void Header_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e) => DragMove();
     }
 }

@@ -1,15 +1,18 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
+using SignalMessenger.Database.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security;
+using Unity;
 
 namespace SignalMessenger.ViewModels
 {
 	public class LoginViewModel : BindableBase
 	{
+        private IUserRepository _userRepository;
         private IRegionManager _regionManager;
 
         private string login;
@@ -34,10 +37,10 @@ namespace SignalMessenger.ViewModels
         }
         public DelegateCommand LoginCommand { get; }
 
-        public LoginViewModel(IRegionManager regionManager)
+        public LoginViewModel(IRegionManager regionManager, IUserRepository userRepository)
         {
+            _userRepository = userRepository;
             _regionManager = regionManager;
-
             LoginCommand = new DelegateCommand(loginCommand, CanLogin);
         }
 

@@ -12,6 +12,16 @@ namespace SignalMessenger.ViewModels
 {
     public class ChatViewModel : BindableBase
     {
+        private bool isEnabled;
+        public bool IsEnabled
+        {
+            get => isEnabled;
+            set
+            {
+                SetProperty(ref isEnabled, value);
+            }
+        }
+
         private int MeUserId;
         private int FriendUserId;
 
@@ -25,6 +35,7 @@ namespace SignalMessenger.ViewModels
 
         public ChatViewModel(IChatDialogService chatDialogService, IServerService serverService, IUserService userService)
         {
+            IsEnabled = false;
             MeUserId = userService.GetCurrentUser().Id;
             _chatDialogService = chatDialogService;
             _serverService = serverService;
@@ -52,6 +63,7 @@ namespace SignalMessenger.ViewModels
 
         private async void _chatDialogService_OnDialogChanged(UserPresenter chat)
         {
+            IsEnabled = true;
             Messages.Clear();
 
             var messages = await _serverService.GetMessageHistory(chat.Dialog.Id);

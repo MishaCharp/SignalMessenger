@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
 
         <ContentControl MouseLeftButtonDown="Header_MouseLeftButtonDown" HorizontalAlignment="Stretch" Grid.Row="0" prism:RegionManager.RegionName="HeaderRegion"/>
-        <ContentControl Grid.Row="1" prism:RegionManager.RegionName="MainRegion" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ContentControl Grid.Row="1" prism:RegionManager.RegionName="MainRegion"/>
 
     </Grid>
 </Window>

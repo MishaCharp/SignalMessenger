@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SignalMessenger.Database.Models
 {
@@ -16,11 +13,23 @@ namespace SignalMessenger.Database.Models
         public string Name { get; set; }
         public string Patronimyc { get; set; }
 
+        [NotMapped]
+        public string SurnameName
+        {
+            get => Surname + " " + Name;
+        }
+
+        [NotMapped]
+        public string SurnameNamePatronymic
+        {
+            get => Surname + " " + Name + " " + Patronimyc;
+        }
+
         public List<Friendship> Friendship { get; set; }
         public List<Friendship> Friendship1 { get; set; }
 
-        public List<RequestOfFriendship> RequestOfFriendship { get; set;}
-        public List<RequestOfFriendship> RequestOfFriendship1 { get; set;}
+        public List<RequestOfFriendship> RequestOfFriendship { get; set; }
+        public List<RequestOfFriendship> RequestOfFriendship1 { get; set; }
 
         public override void UpdateProperties(NativeEntity entity)
         {

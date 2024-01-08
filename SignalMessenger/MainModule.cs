@@ -17,6 +17,8 @@ namespace SignalMessenger
             var region = containerProvider.Resolve<IRegionManager>();
             region.RegisterViewWithRegion("MainRegion", typeof(LoginView));
             region.RegisterViewWithRegion("HeaderRegion", typeof(HeaderView));
+            region.RegisterViewWithRegion("DialogsRegion", typeof(DialogsView));
+            region.RegisterViewWithRegion("ChatRegion", typeof(ChatView));
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

@@ -13,6 +13,7 @@ namespace SignalMessenger.Database.Models
         public DateTime DateTime { get; set; }
 
         public List<Dialog> Dialogs { get; set; }
+        public List<DialogMessage> DialogMessages { get; set; }
 
         public override void UpdateProperties(NativeEntity entity)
         {

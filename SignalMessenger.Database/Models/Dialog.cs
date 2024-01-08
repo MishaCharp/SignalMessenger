@@ -12,6 +12,8 @@ namespace SignalMessenger.Database.Models
         public Friendship Friendship { get; set; }
         public Message LastMessage { get; set; }
 
+
+
         public List<DialogMessage> DialogMessages { get; set; }
 
         public override void UpdateProperties(NativeEntity entity)

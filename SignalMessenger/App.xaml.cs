@@ -1,7 +1,7 @@
 ﻿using Prism.Ioc;
 using Prism.Modularity;
-using SignalMessenger.Database.Repository.Interfaces;
-using SignalMessenger.Database.Repository.Repositories;
+using SignalMessenger.Services;
+using SignalMessenger.Services.Interfaces;
 using SignalMessenger.Views;
 using System.Windows;
 
@@ -11,12 +11,10 @@ namespace SignalMessenger
     {
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.Register<IUserRepository, UserRepository>();
-            containerRegistry.Register<IRequestOfFriendshipRepository, RequestOfFriendshipRepository>();
-            containerRegistry.Register<IMessageRepository, MessageRepository>();
-            containerRegistry.Register<IFriendshipRepository, FriendshipRepository>();
-            containerRegistry.Register<IDialogRepository, DialogRepository>();
-            containerRegistry.Register<IDialogMessageRepository, DialogMessageRepository>();
+            containerRegistry.RegisterSingleton<IUserService, UserService>();
+            containerRegistry.RegisterSingleton<IServerService, ServerService>();
+            containerRegistry.RegisterSingleton<IDatabaseService, DatabaseService>();
+            containerRegistry.RegisterSingleton<IChatDialogService, ChatDialogService>();
         }
 
         protected override Window CreateShell()

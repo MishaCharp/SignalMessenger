@@ -3,22 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"             
              prism:ViewModelLocator.AutoWireViewModel="True" FontSize="16">
-    <Grid>
-        <StackPanel>
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 
-            <DockPanel Width="300" Margin="5" Height="30">
-                <TextBlock Text="Логин" Width="100"/>
-                <TextBox Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
-            </DockPanel>
+        <DockPanel Width="300" Margin="5" Height="30">
+            <TextBlock Text="Логин" Width="100"/>
+            <TextBox Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+        </DockPanel>
 
-            <DockPanel Width="300" Margin="5" Height="30">
-                <TextBlock Text="Пароль" Width="100"/>
-                <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
-            </DockPanel>
+        <DockPanel Width="300" Margin="5" Height="30">
+            <TextBlock Text="Пароль" Width="100"/>
+            <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+        </DockPanel>
 
-            <Button Margin="5" Content="Войти" Command="{Binding LoginCommand}" Width="300" Height="30"/>
-            <Button Margin="5" IsEnabled="False" Content="Зарегистрироваться" Command="{Binding LoginCommand}" Width="300" Height="30"/>
+        <Button Margin="5" Content="Войти" Command="{Binding LoginCommand}" Width="300" Height="30"/>
+        <Button Margin="5" IsEnabled="False" Content="Зарегистрироваться" Command="{Binding LoginCommand}" Width="300" Height="30"/>
 
-        </StackPanel>
-    </Grid>
+    </StackPanel>
 </UserControl>

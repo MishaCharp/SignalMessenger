@@ -1,21 +1,21 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
-using SignalMessenger.Database.Repository.Interfaces;
-using System;
-using System.Collections.Generic;
+using SignalMessenger.Services;
+using SignalMessenger.Services.Interfaces;
 using System.Linq;
-using System.Security;
-using Unity;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace SignalMessenger.ViewModels
 {
-	public class LoginViewModel : BindableBase
-	{
-        private IUserRepository _userRepository;
+    public class LoginViewModel : BindableBase
+    {
+        private IDatabaseService _databaseRepository;
+        private IUserService _userService;
         private IRegionManager _regionManager;
 
-        private string login;
+        private string login = "mishacharp";
         public string Login
         {
             get => login;
@@ -25,7 +25,7 @@ namespace SignalMessenger.ViewModels
                 LoginCommand.RaiseCanExecuteChanged();
             }
         }
-        private string password;
+        private string password = "test";
         public string Password
         {
             get => password;
@@ -37,23 +37,38 @@ namespace SignalMessenger.ViewModels
         }
         public DelegateCommand LoginCommand { get; }
 
-        public LoginViewModel(IRegionManager regionManager, IUserRepository userRepository)
+        public LoginViewModel(IRegionManager regionManager, IDatabaseService databaseService, IUserService userService)
         {
-            _userRepository = userRepository;
+            _databaseRepository = databaseService;
+            _userService = userService;
             _regionManager = regionManager;
+
             LoginCommand = new DelegateCommand(loginCommand, CanLogin);
         }
 
         bool CanLogin()
         {
-            if(!string.IsNullOrEmpty(Login) && !string.IsNullOrEmpty(Password)) return true;
+            if (!string.IsNullOrEmpty(Login) && !string.IsNullOrEmpty(Password)) return true;
             else return false;
         }
 
-        private void loginCommand()
+        private async void loginCommand()
         {
-            _regionManager.RequestNavigate("MainRegion","WorkplaceView");
+            var allUsers = await _databaseRepository.GetAllUsers();
+            var user = allUsers.FirstOrDefault(x => x.Login == Login && x.Password == Password);
+            
+
+
+            if (user != null)
+            {
+                _userService.SetCurrentUser(user);
+                _regionManager.RequestNavigate("MainRegion", "WorkplaceView");
+            }
+            else
+            {
+                MessageBox.Show("Пользователь не найден!");
+            }
         }
 
-	}
+    }
 }
